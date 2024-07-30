@@ -1,4 +1,4 @@
-import threading
+import multiprocessing
 
 
 class WarehouseManager:
@@ -20,7 +20,7 @@ class WarehouseManager:
 
     def run(self, requests):
         for request in requests:
-            p = threading.Thread(target=self.process_request, args=(request,))
+            p = multiprocessing.Process(target=self.process_request, args=(request,))
             p.start()
             p.join()
 
