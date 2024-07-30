@@ -3,7 +3,8 @@ import multiprocessing
 
 class WarehouseManager:
     def __init__(self):
-        self.data = {}
+        manager = multiprocessing.Manager()
+        self.data = manager.dict()
 
     def process_request(self, request):
         product, action, quantity = request
