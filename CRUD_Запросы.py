@@ -22,7 +22,7 @@ async def post_user(username: Annotated[str,Path(min_length=4, max_length=20, de
 async def update_user(user_id: Annotated[int, Path(ge=1, le=100, description='Enter User ID', example='5')],
                       username: Annotated[str,Path(min_length=4, max_length=20, description='Enter username', example='Misha')],
                       age: Annotated[int, Path(ge=18, le=120, description='Enter age', example='24')]):
-    if user_id in users:
+    if str(user_id) in users:
         users[user_id] = f'Имя: {username}, возраст: {age}'
         return {"message": f"Пользователь {user_id} успешно изменен"}
     else:
@@ -31,8 +31,8 @@ async def update_user(user_id: Annotated[int, Path(ge=1, le=100, description='En
 
 @app.delete('/user/{user_id}')
 async def delete_user(user_id: Annotated[int, Path(ge=1, le=100, description='Enter User ID', example='5')]):
-    if user_id in users:
-        del users[user_id]
+    if str(user_id) in users:
+        del users[str(user_id)]
         return {"message": f"Пользователь {user_id} успешно удален"}
     else:
         return {"message": f"Пользователь с id {user_id} не найден"}
