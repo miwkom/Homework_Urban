@@ -17,7 +17,6 @@ class User(Base):
     tasks = relationship('Task', back_populates='user')
 
 
-if __name__ == '__main__':
-    from sqlalchemy.schema import CreateTable
+from sqlalchemy.schema import CreateTable
 
-    print(CreateTable(User.__table__))
+print(CreateTable(User.__table__))
